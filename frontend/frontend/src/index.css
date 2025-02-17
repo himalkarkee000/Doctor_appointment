@@ -6,3 +6,7 @@
     /* @apply block */
     display: block;
 }
+
+::-webkit-scrollbar{
+   @apply hidden
+}
