@@ -1,21 +1,31 @@
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { AppContext } from "../context/AppContext";
+import React, { useContext, useEffect, useState } from 'react'
+import { doctors } from '../assets/assets'
+import { AppContext } from '../context/AppContext'
+import { useNavigate } from 'react-router-dom'
 
+const RelatedDoctors = ({docId,speciality}) => {
+  
+  const {doctors}=  useContext(AppContext)
+  const navigate = useNavigate()
 
+  const [relDocs,setRelDocs] = useState([])
 
+  useEffect(()=>{
+    if(doctors.length >0  && speciality){
+        const doctorsData = doctors.filter((doc)=>doc.speciality === speciality && doc._id !== docId)
+        setRelDocs(doctorsData)
+    }
 
-const TopDoctors = () => {
-    const navigate = useNavigate();
-    const {doctors} =useContext(AppContext)
-  return (
-    <div className="flex items-center flex-col gap-4 py-16 text-gray-500 md:mx-10">
+  },[doctors,speciality,docId])
+    return (
+    <>
+      <div className="flex items-center flex-col gap-4 py-16 text-gray-500 md:mx-10">
       <h1 className="text-3xl font-medium">Top Doctors to Book</h1>
       <p className="sm:w-1/3 text-center text-small">
         Simply browse through our extensive list of trusted doctors
       </p>
       <div  className="w-full grid grid-cols-auto gap-4 pt-5 gap-y-6 px-3 sm:px-0">
-        {doctors.slice(0, 10).map((item, index) => (
+        {relDocs.slice(0, 5).map((item, index) => (
           <div onClick={()=>{navigate(`/appoinment/${item._id}`);scrollTo(0,0)} }
             className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
             key={index}
@@ -36,7 +46,8 @@ const TopDoctors = () => {
       </div>
       <button onClick={()=>navigate('/doctors')} className="bg-blue-50 rounded-full px-12 py-3 mt-10 ">More</button>
     </div>
-  );
-};
+    </>
+  )
+}
 
-export default TopDoctors;
+export default RelatedDoctors
