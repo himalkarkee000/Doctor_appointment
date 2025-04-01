@@ -13,7 +13,7 @@ import DoctorsList from './pages/Admin/DoctorsList';
 const App = () => {
   const {aToken}= useContext(AdminContext)
   return aToken ? (
-    <div className='bg-[#9c9fab]'>
+    <div className='bg-[#ebebed]'>
       <ToastContainer/>
       <Navbar/>
       <div className='flex items-start'>
