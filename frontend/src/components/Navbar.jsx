@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { assets } from "../assets/assets";
 import { NavLink, useNavigate } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
-  const [token, setToken] = useState(true);
+  // const [token, setToken] = useState(true);
+
+  const {token,setToken} = useContext(AppContext)
+
+  const logOut = ()=>{
+    setToken('')
+    localStorage.removeItem('token')
+  }
 
   // console.log("Token value", token);
   return (
@@ -55,7 +63,7 @@ const Navbar = () => {
                   My Appoiment
                 </p>
                 <p
-                  onClick={() => setToken(false)}
+                  onClick={() => {logOut}}
                   className="hover:text-black cursor-pointer"
                 >
                   LogOut
