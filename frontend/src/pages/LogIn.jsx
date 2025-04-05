@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import {useNavigate} from 'react-router-dom'
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -10,6 +11,8 @@ const LogIn = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate()
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -38,6 +41,12 @@ const LogIn = () => {
       
     }
   };
+  useEffect(()=>{
+      if(token){
+        navigate('/')
+       
+      }
+  },[token])
 
   return (
     <>

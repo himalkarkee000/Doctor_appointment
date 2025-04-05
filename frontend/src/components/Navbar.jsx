@@ -63,7 +63,7 @@ const Navbar = () => {
                   My Appoiment
                 </p>
                 <p
-                  onClick={() => {logOut}}
+                  onClick={logOut}
                   className="hover:text-black cursor-pointer"
                 >
                   LogOut

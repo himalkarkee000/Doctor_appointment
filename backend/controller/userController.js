@@ -80,8 +80,46 @@ const loginUser = async(req,res)=>{
             })
         }
     } catch (error) {
-        console.log(error)
+      
+        res.json({
+            success:false,
+            message:error.message
+        })
         
     }
 }
-export{registerUser ,loginUser}
+
+//To get the User Profile Data
+const getProfile = async(req,res)=>{
+    try {
+        const{userId} = req.body
+        
+        const userData = await UserModel.findById(userId).select('-password')
+        res.json({success:true, userData})
+
+
+    } catch (error) {
+        
+        res.json({
+            success:false,
+            message:error.message
+        })
+    }
+}
+//APi to update user profile
+const updateProfile = async(req,res)=>{
+    try {
+        const {userId,name,phone,address,dob,gender} =req.body
+        const imageFile = req.file
+        
+    } catch (error) {
+        
+        res.json({
+            success:false,
+            message:error.message
+        })
+        
+    }
+}
+
+export{registerUser ,loginUser,getProfile}
