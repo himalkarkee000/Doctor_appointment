@@ -5,11 +5,11 @@ import LogIn from "./pages/LogIn";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import MyProfile from "./pages/MyProfile";
-import Appoitment from "./pages/Appoitment";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import MyAppoitment from "./pages/MyAppoitment";
 import { ToastContainer } from 'react-toastify';
+import Appoitment from "./pages/Appoitment";
+import MyAppointment from "./pages/MyAppoitment";
 
 const App = () => {
   return (
@@ -26,7 +26,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/appoinment/:docId" element={<Appoitment />} />
-        <Route path="/my-appoiments" element={<MyAppoitment/>}/>
+        <Route path="/my-appointments" element={<MyAppointment/>}/>
       </Routes>
       <Footer />
     </div>

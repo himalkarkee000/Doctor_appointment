@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
 
 const Banner = () => {
 const navigate = useNavigate()
+ const { userData, token } = useContext(AppContext);
 
   return (
     <div className="bg-primary rounded-lg flex px-6 sm:px-10 md:px-14 lg:px-12  my-8 md:mx-10 ">
@@ -13,7 +15,12 @@ const navigate = useNavigate()
           <p>Book Appoitment</p>
           <p className="mt-4">With 100+ Trusted Doctors</p>
         </div>
-        <button onClick={()=>{navigate('/login'); scrollTo(0,0)}} className="bg-white text-sm sm:text-base text-gray-600 rounded-full px-8 py-3 mt-6 hover:scale-105 transition-all">Create account</button>
+        {
+          token ? 
+          <button onClick={()=>{navigate('/doctors'); scrollTo(0,0)}} className="bg-white text-sm sm:text-base text-gray-600 rounded-full px-8 py-3 mt-6 hover:scale-105 transition-all">Book appointment</button>
+          :<button onClick={()=>{navigate('/login'); scrollTo(0,0)}} className="bg-white text-sm sm:text-base text-gray-600 rounded-full px-8 py-3 mt-6 hover:scale-105 transition-all">Create account</button>
+        }
+        {/* <button onClick={()=>{navigate('/login'); scrollTo(0,0)}} className="bg-white text-sm sm:text-base text-gray-600 rounded-full px-8 py-3 mt-6 hover:scale-105 transition-all">Create account</button> */}
       </div>
       {/* Right side  */}
       <div className="hidden md:block md:w-1/3 lg:w-[370px] relative ">

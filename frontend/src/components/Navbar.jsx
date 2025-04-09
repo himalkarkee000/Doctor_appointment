@@ -8,7 +8,7 @@ const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   // const [token, setToken] = useState(true);
 
-  const {token,setToken} = useContext(AppContext)
+  const {token,setToken,userData} = useContext(AppContext)
 
   const logOut = ()=>{
     setToken('')
@@ -43,7 +43,7 @@ const Navbar = () => {
           <div className="flex items-center gap-2 cursor-pointer  relative group" >
             <img
               className="w-8 rounded-full "
-              src={assets.profile_pic}
+              src={userData.image}
               alt="profile"
             />
             <img className="w-2.5" src={assets.dropdown_icon} alt="" />
