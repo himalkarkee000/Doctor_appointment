@@ -11,6 +11,7 @@ import AppointmentModel from '../model/appointmentModel.js'
 const registerUser =async(req,res) =>{
     try {
         const {name , email , password} = req.body
+        console.log(name,email,password)
 
         if(!name || !password || !email){
             return res.json({
@@ -57,12 +58,14 @@ const registerUser =async(req,res) =>{
         })
         
     }
+   
 }
 
 const loginUser = async(req,res)=>{
     try {
         
         const {email,password} = req.body
+        console.log(email,password)
         const user = await UserModel.findOne({email})
         if(!user){
            return res.json({
@@ -226,4 +229,43 @@ const listAppointment = async(req,res)=>{
         })
     }
 }
-export{registerUser ,loginUser,getProfile,updateProfile ,bookAppointment,listAppointment}
+
+//Api To cancel the appointment
+const cancelAppointment = async(req,res)=>{
+    try {
+        const {userId , appointmentId} = req.body
+        const appointmentData = await AppointmentModel.findById(appointmentId)
+
+        //verify appointment User
+        if(appointmentData.userId !== userId){
+            return res.json({
+                success:false,
+                message:"Unauthorised action"
+            })
+        }
+        await AppointmentModel.findByIdAndUpdate(appointmentId,{
+            cancelled:true
+        })
+        //Releasing Doctor Slot
+        const {docId,slotDate,slotTime} = appointmentData
+        const doctorData = await DoctorModel.findById(docId)
+
+        let slots_booked = doctorData.slots_booked
+        slots_booked[slotDate] = slots_booked[slotDate].filter(e=> e !==slotTime)
+        await DoctorModel.findByIdAndUpdate(docId,{slots_booked})
+
+        res.json({
+            success:true,
+            message:"Appointment cancelle"
+        })
+
+    } catch (error) {
+        console.log(error)
+        res.json({
+            success:false,
+            message:error.message
+        })
+        
+    }
+}
+export{registerUser ,loginUser,getProfile,updateProfile ,bookAppointment,listAppointment,cancelAppointment}

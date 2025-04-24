@@ -5,10 +5,12 @@ import { assets } from "../assets/assets";
 import {toast} from 'react-toastify'
 import RelatedDoctors from "../components/RelatedDoctors";
 import axios from "axios";
-
+// import { doctors } from "../assets/assets";
 const Appoitment = () => {
   const { docId } = useParams();
+  
   const { doctors,backendUrl,token, currencySymbol,getDoctorsData} = useContext(AppContext);
+  // const { backendUrl,token, currencySymbol,getDoctorsData} = useContext(AppContext);
   const daysOfWeeks = ["Sun", "Mon", "Tue", "Wed", "Thus", "Fri", "Sat"];
 
   const [docInfo, setDocInfo] = useState(null);

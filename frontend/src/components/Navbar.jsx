@@ -76,7 +76,7 @@ const Navbar = () => {
             onClick={() => navigate("/login")}
             className="bg-primary text-white px-8 py-3 rounded-full font-light hidden md:block"
           >
-            Create accout
+            Create account
           </button>
         )}
         <img onClick={()=>setShowMenu(true)} className="w-6 md:hidden" src={assets.menu_icon} alt="" />

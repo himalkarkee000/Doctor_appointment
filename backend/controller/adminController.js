@@ -80,11 +80,15 @@ const addDoctor = async(req,res,next)=>{
 }
 const loginAdmin = async(req,res,next)=>{
     try {
+        console.log("hello")
+        
         const {email,password}=req.body
+
         if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
             const token = jwt.sign(email+password,process.env.JWT_SECRET)
             res.json({
-                success:true,token
+                success:true,token,
+                message:"SUccessfull"
             })
 
         }else{
@@ -93,8 +97,13 @@ const loginAdmin = async(req,res,next)=>{
                 message:"Invalid Credential"
             })
         }
+
+        console.log("Hello success")
+
+
         
     } catch (exception) {
+        console.log("Hello unsuccess")
         console.log(exception)
         res.json({
             success:true,

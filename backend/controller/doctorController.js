@@ -21,8 +21,15 @@ const changeAvailability =async(req,res)=>{
     }
 }
 const doctorList = async(req,res)=>{
+    // console.log("doctorList API called");
+
+    // res.json({
+    //     result:"Success",
+    //     message:"Success"
+    // })
     try {
         const doctors = await DoctorModel.find({}).select(['-password','-email'])
+        
         res.json({
             success:true,
             doctors

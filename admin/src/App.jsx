@@ -3,12 +3,12 @@ import Login from './pages/Login'
 import { ToastContainer } from 'react-toastify';
 import { AdminContext } from './context/AdminContext';
 import Navbar from './components/Navbar';
-import Sidebar from './components/sidebar';
 import { Routes ,Route } from 'react-router-dom';
 import Dashboard from './pages/Admin/Dashboard';
 import AllAppointment from './pages/Admin/AllAppointment';
 import AddDoctor from './pages/Admin/AddDoctor';
 import DoctorsList from './pages/Admin/DoctorsList';
+import Sidebar from './components/Sidebar';
 
 const App = () => {
   const {aToken}= useContext(AdminContext)

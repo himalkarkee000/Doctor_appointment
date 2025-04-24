@@ -84,7 +84,7 @@ const AddDoctor = () => {
               alt=""
             />
           </label>
-          <input onChange={(e)=>setDocImg(e.target.files[0])} type="file" id="doc-image" hidden />
+          <input onChange={(e)=>setDocImg(e.target.files[0])} type="file" id={`doc-image-${name}`} hidden />
           <p>
             Upload Doctor <br /> Picture
           </p>
@@ -119,7 +119,7 @@ const AddDoctor = () => {
 
             <div className="flex flex-col gap-1">
               <p>Doctor Experience</p>
-              <select onChange={(e)=>setExperience(e.target.value)} value={experience} className="border rounded px-3 py-1" name="" id="">
+              <select onChange={(e)=>setExperience(e.target.value)} value={experience} className="border rounded px-3 py-1" name="experience" id="experience">
                 <option value="1 year">1 Year</option>
                 <option value="2 years">2 Years</option>
                 <option value="3 years">3 Years</option>

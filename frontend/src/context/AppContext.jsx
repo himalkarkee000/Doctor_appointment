@@ -9,6 +9,7 @@ const AppContextProvider =(props) =>{
 
     const currencySymbol ='$'
     const backendUrl = import.meta.env.VITE_BACKEND_URL
+    
     const [doctors,setDoctors] = useState([])
     const [token,setToken] = useState(localStorage.getItem('token')?localStorage.getItem('token'):false)
     const [userData,setUserData] = useState(false)
@@ -16,6 +17,8 @@ const AppContextProvider =(props) =>{
     const getDoctorsData = async()=>{
         try {
             const {data} = await axios.get(backendUrl+ '/api/doctor/list')
+            console.log(data)
+            
             if(data.success){
                 setDoctors(data.doctors)
             }else{
@@ -48,6 +51,7 @@ const AppContextProvider =(props) =>{
 
 
     useEffect(()=>{
+        console.log("Fetching doctors from backend...");
         getDoctorsData()
     },[])
 
