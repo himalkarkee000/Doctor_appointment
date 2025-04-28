@@ -271,12 +271,14 @@ const payment = async (req, res) => {
   try {
     const { appointmentId } = req.body;
     const { token } = req.headers;
+    
 
     if (!token) {
       return res.json({ success: false, message: "Unauthorized" });
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
     // console.log(decoded)
     const userId = decoded.id;
 
@@ -319,11 +321,11 @@ const payment = async (req, res) => {
 
       console.log("Khalti Response =>", response.data);
 
-    // Send payment URL to frontend
-    return res.json({
-      success: true,
-      payment_url: response.data.payment_url,
-    });
+      // Send payment URL to frontend
+      return res.json({
+        success: true,
+        payment_url: response.data.payment_url
+      });
   } catch (error) {
     console.log(error.response?.data || error.message);
     res.json({
@@ -334,17 +336,19 @@ const payment = async (req, res) => {
 };
 const verifyPayment = async (req, res) => {
   try {
-    const { appointmentId, khaltiToken, amount } = req.body;
+  
+  
+    const { appointmentId, khaltiToken, amount,pidx  } = req.body;
     console.log("Request Body:", req.body);
-    if (!khaltiToken || !amount) {
-        return res.status(400).json({ success: false, message: "Missing khaltiToken or amount" });
+    if (!khaltiToken || !amount || !appointmentId || !pidx ) {
+        return res.status(400).json({ success: false, message: "Missing khaltiToken or amount or appointment " });
       }
 
-      console.log("Khalti Token:", khaltiToken);
+      // console.log("Khalti Token:", khaltiToken);
 
     // Call Khalti API to verify payment
     const response = await axios.post(
-      "https://khalti.com/api/v2/payment/verify/",
+      "https://khalti.com/api/v2/epayment/lookup/",
       {
         token: khaltiToken,
         amount: amount * 100, // Convert amount to paisa
@@ -357,7 +361,8 @@ const verifyPayment = async (req, res) => {
     );
     console.log("Khalti API Response:", response.data)
 
-    if (response.data.idx) {
+    // if (response.data.idx) {
+    if(response.data.status === "Completed"){
       const appointment = await AppointmentModel.findById(appointmentId);
       if (!appointment) {
         return res

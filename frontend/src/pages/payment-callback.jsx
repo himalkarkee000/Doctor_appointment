@@ -29,6 +29,7 @@ const PaymentCallback = () => {
             khaltiToken,
             amount,
           },{headers:{token}});
+          console.log('Token',token)
           console.log("1stplace",data)
   
           if (data.success) {
