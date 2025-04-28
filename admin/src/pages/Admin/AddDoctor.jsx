@@ -50,7 +50,7 @@ const AddDoctor = () => {
       })
       if(data.success){
         toast.success(data.message)
-        setDocImg(false)
+        setDocImg(null)
         setName('')
         setPassword('')
         setEmail('')
@@ -77,14 +77,14 @@ const AddDoctor = () => {
 
       <div className="bg-white px-8 py-8 border rounded w-full max-w-4xl max-h-[80vh] overflow-y-scroll">
         <div className="flex items-center gap-4 mb-8 text-gray-500">
-          <label htmlFor="doc-image">
+          <label htmlFor="doc-image" className="cursor-pointer">
             <img
               className="w-16 bg-gray-100 rounded-full cursor-pointer"
               src={docImg? URL.createObjectURL(docImg): assets.upload_area}
               alt=""
             />
           </label>
-          <input onChange={(e)=>setDocImg(e.target.files[0])} type="file" id={`doc-image-${name}`} hidden />
+          <input onChange={(e)=>setDocImg(e.target.files[0])} type="file" id={`doc-image-${name}`} hidden accept="image/*"/>
           <p>
             Upload Doctor <br /> Picture
           </p>

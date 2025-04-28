@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import { ToastContainer } from 'react-toastify';
 import Appoitment from "./pages/Appoitment";
 import MyAppointment from "./pages/MyAppoitment";
+import PaymentCallback from "./pages/payment-callback";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/appoinment/:docId" element={<Appoitment />} />
         <Route path="/my-appointments" element={<MyAppointment/>}/>
+        <Route path='/payment/verify' element={<PaymentCallback/>}/>
       </Routes>
       <Footer />
     </div>

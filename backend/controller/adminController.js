@@ -80,7 +80,7 @@ const addDoctor = async(req,res,next)=>{
 }
 const loginAdmin = async(req,res,next)=>{
     try {
-        console.log("hello")
+        // console.log("hello")
         
         const {email,password}=req.body
 

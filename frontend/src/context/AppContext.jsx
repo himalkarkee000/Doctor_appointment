@@ -51,7 +51,7 @@ const AppContextProvider =(props) =>{
 
 
     useEffect(()=>{
-        console.log("Fetching doctors from backend...");
+        // console.log("Fetching doctors from backend...");
         getDoctorsData()
     },[])
 
